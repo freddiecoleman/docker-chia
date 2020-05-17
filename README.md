@@ -1,3 +1,5 @@
+This docker image is provided by [Chia Blockchain Explorer](https://www.chiaexplorer.com).
+
 # What is Chia?
 
 Chia is a new blockchain and smart transaction platform that is more efficient, decentralized, and secure.
