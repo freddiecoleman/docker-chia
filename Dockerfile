@@ -18,4 +18,4 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && sh install.sh \
     && chmod +x /usr/local/bin/docker-entrypoint.sh
 
-ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+RUN ["/bin/bash", "/usr/local/bin/docker-entrypoint.sh"]
