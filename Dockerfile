@@ -16,6 +16,5 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && sed -i 's/localhost/chia/g' src/rpc/rpc_client.py \
     && git checkout tags/1.0beta5 -b 1.0beta5 \
     && sh install.sh \
-    && chmod +x /usr/local/bin/docker-entrypoint.sh
-
-RUN ["/bin/bash", "/usr/local/bin/docker-entrypoint.sh"]
+    && chmod +x /usr/local/bin/docker-entrypoint.sh \
+    && sh /usr/local/bin/docker-entrypoint.sh
