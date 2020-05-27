@@ -3,5 +3,5 @@
 cd /chia-blockchain
 . ./activate
 chia init
-yes | chia generate keys
+yes | chia keys generate
 chia start node -r &
