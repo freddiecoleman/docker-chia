@@ -25,7 +25,6 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && sed -i 's/localhost/chia/g' src/rpc/farmer_rpc_client.py \
     && sed -i 's/127.0.0.1/chia/g' src/server/server.py \
     && sh install.sh \
-    && chmod +x /usr/local/bin/docker-entrypoint.sh \
-    && sh /usr/local/bin/docker-entrypoint.sh
+    && chmod +x /usr/local/bin/docker-entrypoint.sh
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
