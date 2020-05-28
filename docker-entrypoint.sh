@@ -5,3 +5,4 @@ cd /chia-blockchain
 chia init
 chia keys generate
 chia start node -r
+tail -f /dev/null
