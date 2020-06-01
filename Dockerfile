@@ -12,7 +12,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && apt-get install python3.8-venv python3.8-distutils sudo git -y \
     && git clone https://github.com/Chia-Network/chia-blockchain.git \
     && cd chia-blockchain \
-    && git checkout dev \
+    && git checkout tags/1.0beta6 -b 1.0beta6 \
     && sed -i 's/127.0.0.1/chia/g' src/daemon/client.py \
     && sed -i 's/localhost/chia/g' src/daemon/server.py \
     && sed -i 's/127.0.0.1/chia/g' src/rpc/abstract_rpc_server.py \
