@@ -16,6 +16,8 @@ If you want to use the rpc server (enabled by default) and not use network mode 
 
 - [latest](https://github.com/freddiecoleman/docker-chia/blob/master/Dockerfile)
 - [1.0-beta5](https://github.com/freddiecoleman/docker-chia/blob/1.0-beta5/Dockerfile)
+- [1.0-beta6](https://github.com/freddiecoleman/docker-chia/blob/1.0-beta6/Dockerfile)
+- [1.0-beta7](https://github.com/freddiecoleman/docker-chia/blob/1.0-beta7/Dockerfile)
 
 ## Ports
 
