@@ -6,11 +6,47 @@ Chia is a new blockchain and smart transaction platform that is more efficient, 
 
 Chia Network develops a blockchain and smart transaction platform created by the inventor of BitTorrent, [Bram Cohen](https://consent.yahoo.com/collectConsent?sessionId=3_cc-session_51f38948-4182-4aaa-819b-acc8787d9490&lang=en-GB&inline=false). It implements the first new Nakamoto consensus algorithm since Bitcoin in 2008. Proofs of Space and Time replace energy intensive “proofs of work.”
 
-### Notes
+### Healthcheck
 
-Currently chia is hardcoded to run an rpc server on localhost which fails in docker containers that do not have network mode of `host`. To work around this issue this image replaces the hardcoded `localhost` with `chia` before compiling.
+A script called `healthcheck.sh` is copied into `/usr/local/bin`. It's a bit of a hack but this can be used to check the health of the service. Here is an example of how it can be used with Hashicorp Nomad + Consul;
 
-If you want to use the rpc server (enabled by default) and not use network mode of `host` you will need to give your container a hostname of `chia`.
+```
+# Registers service with consul for service discovery
+service {
+  name = "chia-node"
+  port = "rpc"
+
+  tags = [
+    "private"
+  ]
+
+  check {
+    name     = "alive"
+    type     = "tcp"
+    interval = "10s"
+    timeout  = "2s"
+  }
+
+  # Need to use a script check because the HTTP request to chia node must contain a body
+  # The healthscheck script has been built into the docker image
+  check {
+    name     = "get_blockchain_state"
+    type     = "script"
+    command  = "/bin/bash"
+    args     = ["/usr/local/bin/healthcheck.sh"]
+    interval = "10s"
+    timeout  = "5s"
+
+    check_restart {
+      # Restart after 2 consecutive failures
+      limit = 2
+      # After restarting do not check health for 90s
+      grace = "90s"
+      ignore_warnings = false
+    }
+  }
+}
+```
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -23,24 +59,3 @@ If you want to use the rpc server (enabled by default) and not use network mode 
 
 - 8444 - Chia protocol
 - 8555 - Chia RPC interface
-
-### Docker run example
-```
-docker run --network=host fcoleman/chia
-```
-
-### Docker compose example
-
-```
-version: '3'
-services:
-  chia:
-    image: 'fcoleman/chia:latest'
-    container_name: chia
-    hostname: chia
-    ports:
-     - "8444:8444"
-     - "8555:8555"
-    working_dir: /chia-blockchain
-```
-
