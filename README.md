@@ -27,8 +27,7 @@ service {
     timeout  = "2s"
   }
 
-  # Need to use a script check because the HTTP request to chia node must contain a body
-  # The healthscheck script has been built into the docker image
+  # Need to use a script check because the HTTP request to chia node must contain a body which cannot be done specified in the check stanza
   check {
     name     = "get_blockchain_state"
     type     = "script"
@@ -46,6 +45,20 @@ service {
     }
   }
 }
+```
+
+When it fails the Chia node is restarted by Nomad;
+
+```
+Recent Events:
+Time                       Type              Description
+2020-06-29T19:50:22+01:00  Started           Task started by client
+2020-06-29T19:50:05+01:00  Restarting        Task restarting in 16.161437852s
+2020-06-29T19:50:05+01:00  Terminated        Exit Code: 137, Exit Message: "Docker container exited with non-zero exit code: 137"
+2020-06-29T19:50:00+01:00  Restart Signaled  healthcheck: check "get_blockchain_state" unhealthy
+2020-06-29T19:45:49+01:00  Started           Task started by client
+2020-06-29T19:45:47+01:00  Task Setup        Building Task Directory
+2020-06-29T19:45:42+01:00  Received          Task received by client
 ```
 
 ## Supported tags and respective `Dockerfile` links
