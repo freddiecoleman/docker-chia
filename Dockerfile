@@ -6,6 +6,7 @@ EXPOSE 8444
 ENV TZ=Europe/Minsk
 
 COPY docker-entrypoint.sh /usr/local/bin
+COPY healthcheck.sh /usr/local/bin
 
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
     && apt-get update \
