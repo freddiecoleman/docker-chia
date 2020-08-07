@@ -14,7 +14,7 @@ Chia Network develops a blockchain and smart transaction platform created by the
 
 ### Healthcheck
 
-A script called `healthcheck.sh` is copied into `/usr/local/bin`. It's a bit of a hack but this can be used to check the health of the service. Here is an example of how it can be used with Hashicorp Nomad + Consul;
+A script called `healthcheck.sh` is copied into `/usr/local/bin`. This can be used to check the health of the service. Here is an example of how it can be used with Hashicorp Nomad + Consul;
 
 ```
 # Registers service with consul for service discovery
